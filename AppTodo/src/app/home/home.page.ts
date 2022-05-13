@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -55,18 +54,10 @@ export class HomePage {
     toast.present();
     return;
     }
-  const tarefa = { nome:novaTarefa, realizada: 0};
+  const tarefa = { nome:novaTarefa, realizada: false};
   this.tarefas.push(tarefa);
-
-  this.todoService.adicionarTarefa(tarefa.nome, tarefa.realizada)
-  .then((resposta)=>{
-    console.log(resposta);
-  })
-  .catch((erro))=>{
-    console.error(erro);
+  this.salvaLocalStorage();
   }
-  }
-  
   
   salvaLocalStorage(){
     localStorage.setItem('tarefaUsuario', JSON.stringify(this.tarefas));
