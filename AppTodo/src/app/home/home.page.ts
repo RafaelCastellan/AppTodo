@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { TodoService } from '../services/todo.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,7 @@ import { ActionSheetController, AlertController, ToastController } from '@ionic/
 export class HomePage {
 
   tarefas: any[] = [];
-  constructor(private alertCrtl: AlertController, private toastCtrl: ToastController, private actionSheetCtrl : ActionSheetController) {}
+  constructor(private alertCrtl: AlertController, private toastCtrl: ToastController, private actionSheetCtrl : ActionSheetController, private todoService: TodoService) {}
 
   async showAdd(){
     const alert = await this.alertCrtl.create({
@@ -54,9 +56,17 @@ export class HomePage {
     toast.present();
     return;
     }
-  const tarefa = { nome:novaTarefa, realizada: false};
+  const tarefa = { nome:novaTarefa, realizada: 0};
   this.tarefas.push(tarefa);
-  this.salvaLocalStorage();
+  
+  //this.todoService.adicionarTarefa(tarefa.nome, tarefa.realizada)
+  //.then((resposta))=>{
+  //  console.log(resposta);
+  //})
+  //.catch((erro))=>{
+  //  console.error(erro);
+  //});
+  
   }
   
   salvaLocalStorage(){
