@@ -11,10 +11,19 @@ export class TodoService {
   adicionarTarefa(tarefa: String, realizada:any){
     const url = 'http://localhost/ApiTodo/api.php';
 
-    const param = {tarefa:tarefa, realizada:realizada};
+    const param = {nome:tarefa, realizada:0};
 
-    return this.http.post(url,param).toPromise();
+               
+   return this.http.post(url,param).toPromise();
+  }
 
+  listaTarefa(){
+    const url = 'http://localhost/ApiTodo/api.php'
+    return this.http.get(url).toPromise();
+    }
 
+  excluiTarefa(id: any){
+  const url = 'http://localhost/ApiTodo/api.php?id='+id
+  return this.http.delete(url).toPromise();
   }
 }
